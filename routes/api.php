@@ -3,9 +3,11 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BudgetController;
 use App\Http\Controllers\Api\ExpensesController;
+use App\Http\Controllers\Api\ForgetPasswordController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\SummaryController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,9 +80,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logOut']);
 });
 
-
+Route::post('/forget-password', [ForgetPasswordController::class, 'forgetPassword']);
+Route::post('/reset-password', [ResetPasswordController::class, 'passwordReset']);
 
 Route::post('/registeruser', [AuthController::class, 'registerUser']);
 Route::post('/loginuser', [AuthController::class, 'loginUser']);
-Route::post('/forget-password', [AuthController::class, 'forgetpassword']);
+// Route::post('/forget-password', [AuthController::class, 'forgetpassword']);
 Route::post('/reset-password/{token}', [AuthController::class, 'resetPassword']);

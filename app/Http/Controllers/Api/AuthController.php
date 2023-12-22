@@ -12,11 +12,13 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
 
-    function forgetpassword(Request $request){
+    function forgetpassword(Request $request)
+    {
         $request->validate([
             'email' => 'required|email|exists:users',
         ]);
@@ -63,15 +65,15 @@ class AuthController extends Controller
     public function loginUser(Request $request)
     {
         $request->validate([
-            'email' => 'required|exists:users,email',
-            'password' => 'min:8|max:255|required',
+            'email' => 'required|exists:users|email',
+            'password' => 'required',
             // 'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->error("Invalid Credentials");
+            return response()->json(['error' => 'Invalid Credentials'], 401);
         }
 
 
@@ -88,8 +90,8 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|min:6',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:8|max:255|confirmed',
-            'password_confirmation' => 'required|min:8|max:255',
+            'password' => [Password::min(8)->mixedCase()->numbers()->symbols()->uncompromised(), 'required', 'confirmed',],
+            'password_confirmation' => 'required',
             // 'g-recaptcha-response' => 'required|captcha',
         ]);
 

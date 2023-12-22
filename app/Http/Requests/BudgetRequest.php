@@ -37,9 +37,7 @@ class BudgetRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'budget_type.required' => 'Hey! this is empty.',
-            'body.required' => 'A message is required',
-            'budget_type.min' => 'A minimum of 3 letters if required',
+            
         ];
     }
 }

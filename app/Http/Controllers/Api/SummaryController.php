@@ -17,6 +17,10 @@ class SummaryController extends Controller
         $educ = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['educ' => $educ]);
@@ -30,6 +34,10 @@ class SummaryController extends Controller
         $ent = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['ent' => $ent]);
@@ -43,6 +51,10 @@ class SummaryController extends Controller
         $food = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['food' => $food]);
@@ -56,6 +68,10 @@ class SummaryController extends Controller
         $health = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['health' => $health]);
@@ -69,6 +85,10 @@ class SummaryController extends Controller
         $misc = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['misc' => $misc]);
@@ -82,6 +102,10 @@ class SummaryController extends Controller
         $shop = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['shop' => $shop]);
@@ -95,6 +119,10 @@ class SummaryController extends Controller
         $trans = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['trans' => $trans]);
@@ -108,6 +136,10 @@ class SummaryController extends Controller
         $util = DB::table('user_expenses')
             ->where('user_id', $user_id)
             ->where('category', $category)
+            ->whereBetween('date', [
+                now()->startOfWeek(),
+                now()->endOfWeek(),
+            ])
             ->sum('amount');
 
         return response()->json(['util' => $util]);
